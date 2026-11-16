@@ -1,0 +1,15 @@
+# AI Clone Viral Reel — Python dependencies
+numpy
+opencv-python
+scenedetect
+librosa
+scipy
+Pillow
+yt-dlp
+
+# Optional: automatic lyrics timing against audio
+faster-whisper
+opencc-python-reimplemented
+
+# Testing
+pytest
