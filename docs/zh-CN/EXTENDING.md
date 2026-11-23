@@ -6,10 +6,10 @@ ReelMimic 的扩充点由浅到深：
 
 | 想做的事 | 改哪里 | 要改程序吗 |
 |---|---|---|
-| 加一种视频风格 | `.claude/skills/video-clone/styles/<name>.md` | 不用 |
-| 加一个制作引擎（新的画法／渲染方式） | `.claude/skills/<engine>/`（一般 agent skill） | 不用 |
+| 加一种视频风格 | `.agents/skills/video-clone/styles/<name>.md` | 不用 |
+| 加一个制作引擎（新的画法／渲染方式） | `.agents/skills/<engine>/`（一般 agent skill） | 不用 |
 | 调整 agent 在某一步怎么做 | `app/server/prompts.ts` | 只改文本，下一轮就生效 |
-| 加新工具给 agent 用 | `.claude/skills/video-clone/scripts/` | 写脚本，再在 prompt／SKILL.md 提到它 |
+| 加新工具给 agent 用 | `.agents/skills/video-clone/scripts/` | 写脚本，再在 prompt／SKILL.md 提到它 |
 | 接另一种 AI 导演（新的 agent CLI） | `app/server/agents/index.ts` | 要 |
 | 改生产线的步骤或顺序 | `app/server/`（见第 5 节）+ `prompts.ts` + `CONTRACT.md` | 要 |
 
@@ -26,7 +26,7 @@ ReelMimic 的扩充点由浅到深：
    ```yaml
    ---
    name: lofi-anime-loop        # 唯一代号，和文件名相同
-   engine: hyperframes          # .claude/skills/ 底下的文件夹名
+   engine: hyperframes          # .agents/skills/ 底下的文件夹名
    medium: 2d-vector            # 2d-painted · 2d-vector · 3d-stylized · 3d-photoreal（选引擎的硬条件）
    priority: 60                 # 两种风格都符合时，大的优先
    ---
@@ -44,7 +44,7 @@ ReelMimic 的扩充点由浅到深：
 引擎就是一般的 agent skill：一个文件夹，里面有 `SKILL.md`（给 agent 的使用说明）和它需要的脚本、范本。
 
 ```
-.claude/skills/my-engine/
+.agents/skills/my-engine/
   SKILL.md          frontmatter（name、description）＋ 怎么建项目、怎么预览单格、怎么输出 MP4、规则与已知的坑
   scripts/ …        渲染、预览工具
   template/ …       新项目骨架（选配）
@@ -62,7 +62,7 @@ ReelMimic 的扩充点由浅到深：
 
 ### 从引擎骨架开始
 
-`.claude/skills/video-clone/assets/engine-kit/` 是做新画法最快的起点：像素风、剪纸、白板、动漫四个引擎都建在它上面。里面有共用的运行环境（时间轴、动作函数、镜头、字幕与渲染界面）、无头 Chrome 的 `render.mjs`、页面范本、`new_project.sh`，以及当初做这些引擎用的检查清单 `ENGINE_BRIEF.md`。拷贝到 `.claude/skills/<你的引擎>/template/`，写好画法函数库和角色，就直接有平行渲染、审查用的总览图与裁切、可续跑的输出。
+`.agents/skills/video-clone/assets/engine-kit/` 是做新画法最快的起点：像素风、剪纸、白板、动漫四个引擎都建在它上面。里面有共用的运行环境（时间轴、动作函数、镜头、字幕与渲染界面）、无头 Chrome 的 `render.mjs`、页面范本、`new_project.sh`，以及当初做这些引擎用的检查清单 `ENGINE_BRIEF.md`。拷贝到 `.agents/skills/<你的引擎>/template/`，写好画法函数库和角色，就直接有平行渲染、审查用的总览图与裁切、可续跑的输出。
 
 ### 角色系统
 
@@ -88,7 +88,7 @@ ReelMimic 的扩充点由浅到深：
 共用片段：`RULES`（内容与授权原则）、`SPEED`（效率规则）、`EYE`（人眼检查清单）、`QA_OUT`（审查输出格式与 blocker/polish 定义）。
 服务器每次派工前都会检查这个档有没有改过，**改完下一轮 agent 就用新指令，不用重启**。
 
-建议做法：先用 `python .claude/skills/video-clone/scripts/timeline.py projects/<id>` 看时间花在哪、哪一关反复退回，再决定改哪段指令。
+建议做法：先用 `python .agents/skills/video-clone/scripts/timeline.py projects/<id>` 看时间花在哪、哪一关反复退回，再决定改哪段指令。
 把「最后评审常退回的东西」往前移到 setup 或 build 阶段定成规格，是最有效的提速方式。
 
 ## 4. 接另一种 AI 导演

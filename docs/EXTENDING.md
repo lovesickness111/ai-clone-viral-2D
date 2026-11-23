@@ -6,10 +6,10 @@ Extension points, from shallow to deep:
 
 | You want to | Change | Code? |
 |---|---|---|
-| Add a video style | `.claude/skills/video-clone/styles/<name>.md` | No |
-| Add a production engine (a new drawing / rendering method) | `.claude/skills/<engine>/` (an ordinary agent skill) | No |
+| Add a video style | `.agents/skills/video-clone/styles/<name>.md` | No |
+| Add a production engine (a new drawing / rendering method) | `.agents/skills/<engine>/` (an ordinary agent skill) | No |
 | Change how an agent handles a step | `app/server/prompts.ts` | Text only, applies on the next turn |
-| Give agents a new tool | `.claude/skills/video-clone/scripts/` | Write the script, then mention it in a prompt / SKILL.md |
+| Give agents a new tool | `.agents/skills/video-clone/scripts/` | Write the script, then mention it in a prompt / SKILL.md |
 | Plug in another AI director (a new agent CLI) | `app/server/agents/index.ts` | Yes |
 | Change the steps or order of the production line | `app/server/` (see §5) + `prompts.ts` + `CONTRACT.md` | Yes |
 
@@ -27,7 +27,7 @@ into `analysis/route.json`.
    ```yaml
    ---
    name: lofi-anime-loop        # unique id, same as the file name
-   engine: hyperframes          # folder name under .claude/skills/
+   engine: hyperframes          # folder name under .agents/skills/
    medium: 2d-vector            # 2d-painted · 2d-vector · 3d-stylized · 3d-photoreal (hard constraint when picking an engine)
    priority: 60                 # when two styles match, the higher one wins
    ---
@@ -49,7 +49,7 @@ An engine is an ordinary agent skill: a folder with a `SKILL.md` (instructions f
 templates it needs.
 
 ```
-.claude/skills/my-engine/
+.agents/skills/my-engine/
   SKILL.md          frontmatter (name, description) + how to create a project, preview a frame, export MP4, rules and pitfalls
   scripts/ …        render and preview tools
   template/ …       new-project skeleton (optional)
@@ -72,10 +72,10 @@ its license to `THIRD_PARTY_NOTICES.md`.
 
 ### Starting from the engine kit
 
-`.claude/skills/video-clone/assets/engine-kit/` is the fastest way to build a new look. It has the shared runtime the
+`.agents/skills/video-clone/assets/engine-kit/` is the fastest way to build a new look. It has the shared runtime the
 pixel-art, paper-cutout, whiteboard and anime-cel engines are built on (timeline, motion helpers, camera, captions and
 the render contract), the headless-Chrome `render.mjs`, a page template, `new_project.sh`, and `ENGINE_BRIEF.md`, the
-checklist those engines were built from. Copy it into `.claude/skills/<your-engine>/template/`, write your drawing
+checklist those engines were built from. Copy it into `.agents/skills/<your-engine>/template/`, write your drawing
 library and characters, and you get parallel rendering, contact sheets and crops for review, and resumable export for
 free.
 
@@ -106,7 +106,7 @@ Shared fragments: `RULES` (content and licensing), `SPEED` (efficiency rules), `
 (review output format and the blocker/polish definitions).
 The server checks this file for changes before every dispatch — **edits apply from the next agent turn, no restart**.
 
-Suggested approach: run `python .claude/skills/video-clone/scripts/timeline.py projects/<id>` to see where time went
+Suggested approach: run `python .agents/skills/video-clone/scripts/timeline.py projects/<id>` to see where time went
 and which gate kept sending work back, then decide what to change. Moving "what the final critic keeps rejecting"
 forward into the setup or build specs is the most effective speed-up.
 

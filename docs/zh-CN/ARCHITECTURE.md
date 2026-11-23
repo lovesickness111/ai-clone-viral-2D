@@ -30,8 +30,8 @@ ReelMimic 由三层组成：**网站**（React）、**服务器**（Node，负�
    │  spawn（stdin 给指令，stdout 串流事件）
    ▼
 agent 工作区（repo 根目录）
-   ├─ .claude/skills/video-clone/   内核 skill（流程、合约、风格表、工具）
-   ├─ .claude/skills/<engine>/      制作引擎 skill
+   ├─ .agents/skills/video-clone/   内核 skill（流程、合约、风格表、工具）
+   ├─ .agents/skills/<engine>/      制作引擎 skill
    └─ projects/<id>/                这支视频的所有文件
 ```
 
@@ -92,7 +92,7 @@ assemble（导演）：组装、混音、全片输出
 
 ## 3. 文件合约
 
-完整格式在 `.claude/skills/video-clone/CONTRACT.md`，重点：
+完整格式在 `.agents/skills/video-clone/CONTRACT.md`，重点：
 
 ```
 projects/<id>/
@@ -142,7 +142,7 @@ projects/<id>/
 | GET | `/api/projects/:id/events` | SSE 事件流 |
 | GET | `/files/:id/*` | 项目内的文件（视频、截屏） |
 
-## 7. 工具（`.claude/skills/video-clone/scripts/`）
+## 7. 工具（`.agents/skills/video-clone/scripts/`）
 
 | 工具 | 用途 |
 |---|---|

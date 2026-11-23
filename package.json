@@ -6,8 +6,10 @@
   "type": "module",
   "scripts": {
     "doctor": "node scripts/doctor.mjs",
-    "analyze": "python .claude/skills/video-clone/scripts/analyze.py",
-    "compare": "python .claude/skills/video-clone/scripts/compare.py"
+    "analyze": "python .agents/skills/video-clone/scripts/analyze.py",
+    "compare": "python .agents/skills/video-clone/scripts/compare.py",
+    "link-skills": "node scripts/link-skills.mjs",
+    "postinstall": "node scripts/link-skills.mjs"
   },
   "dependencies": {
     "hyperframes": "^0.6.2"

@@ -17,7 +17,7 @@ npm run doctor   # 環境檢查
 架構說明在 [ARCHITECTURE.md](ARCHITECTURE.md)，擴充方式在 [EXTENDING.md](EXTENDING.md)。
 
 ## 最常見的貢獻
-- **新風格**：`.claude/skills/video-clone/styles/<name>.md`，附一段你用來測試的參考片描述（不要附上受版權保護的影片檔）。
+- **新風格**：`.agents/skills/video-clone/styles/<name>.md`，附一段你用來測試的參考片描述（不要附上受版權保護的影片檔）。
 - **「已知的坑」**：做片時踩到的問題與解法，補進對應風格檔或引擎的 SKILL.md。
 - **新製作引擎**：一個 agent skill 資料夾；第三方 skill 請附上來源與授權，並更新 `THIRD_PARTY_NOTICES.md`。
 - **流程與指令**：改 `app/server/prompts.ts` 或 `jobs.ts` 時，請說明用哪支片驗證、`timeline.py` 的前後時間比較。

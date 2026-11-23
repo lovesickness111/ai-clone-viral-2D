@@ -32,8 +32,8 @@ Server (app/server)
    │  spawn (prompt on stdin, events streamed on stdout)
    ▼
 Agent workspace (repo root)
-   ├─ .claude/skills/video-clone/   core skill (workflow, contract, style registry, tools)
-   ├─ .claude/skills/<engine>/      production engine skills
+   ├─ .agents/skills/video-clone/   core skill (workflow, contract, style registry, tools)
+   ├─ .agents/skills/<engine>/      production engine skills
    └─ projects/<id>/                every file for one video
 ```
 
@@ -122,7 +122,7 @@ Design points:
 
 ## 3. File contract
 
-The full format is in `.claude/skills/video-clone/CONTRACT.md`. In short:
+The full format is in `.agents/skills/video-clone/CONTRACT.md`. In short:
 
 ```
 projects/<id>/
@@ -177,7 +177,7 @@ builder (kept across fix rounds); reviewers always start fresh.
 | GET | `/api/projects/:id/events` | SSE event stream |
 | GET | `/files/:id/*` | files inside a project (video, frames) |
 
-## 7. Tools (`.claude/skills/video-clone/scripts/`)
+## 7. Tools (`.agents/skills/video-clone/scripts/`)
 
 | Tool | Purpose |
 |---|---|

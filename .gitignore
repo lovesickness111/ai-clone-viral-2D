@@ -22,3 +22,9 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# Claude Code view of .agents/skills (created by npm run link-skills)
+.claude/skills
+
+# Build output of the reel25d engine (npm run build)
+.agents/skills/reel25d-meme-video/engine/bundle.js

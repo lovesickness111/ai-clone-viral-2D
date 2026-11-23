@@ -31,7 +31,7 @@ brief + plan ─────[LLM planning]───▶ Motion Score IR (typed sc
 
 | # | Stage | What it adds | Where |
 |---|---|---|---|
-| 1 | **Perception** | Style Fingerprint: per-frame camera trajectory, fitted easing curves, local (in-frame) motion, tension curve with peak shapes, cut-vs-beat phase, colour arc, frame descriptors; `style_distance` between two fingerprints with readable findings | `.claude/skills/video-clone/scripts/perception/` |
+| 1 | **Perception** | Style Fingerprint: per-frame camera trajectory, fitted easing curves, local (in-frame) motion, tension curve with peak shapes, cut-vs-beat phase, colour arc, frame descriptors; `style_distance` between two fingerprints with readable findings | `.agents/skills/video-clone/scripts/perception/` |
 | 2 | **Motion Score IR** | A typed scene description: shots, layers, rig references, keyframe tracks whose curves are parametric (bezier / spring / named ease) and whose times are musical (`beat 17 + 2f`). Agents emit and patch IR for camera, timing and easing; engines compile it. Drawing code stays agent-written (IR and free code coexist) | `ir/` (schema + validator), one backend per engine, HyperFrames first |
 | 3 | **Closed-loop optimizer** | CMA-ES over IR parameters of the climax shots, objective = `style_distance` to the reference peak, multi-fidelity (low-res proxy renders of key frames → full render to confirm). The LLM decides structure; the optimizer decides numbers | `optimize/` |
 | 4 | **Orchestration kernel** | Event-sourced job state (state = fold(events)), a typed task DAG with declared inputs/outputs, schema-validated agent outputs instead of mtime checks, content-addressed caching, one resource-aware scheduler (agent tokens, Chrome, CPU/GPU) instead of three ad-hoc locks | `app/server/kernel/` replacing `jobs.ts` |
@@ -98,7 +98,7 @@ out/check/fingerprint_overlay.png   reference vs. ours, tension and camera speed
 
 `scripts/tests/` renders synthetic videos with known camera moves (a textured plate warped by a known similarity on a
 known ease, with a cut) and checks that the trajectory, the fitted ease and the cut are recovered; curve fitting, DTW,
-tension peaks and beat phase have analytic tests. Run: `python -m pytest .claude/skills/video-clone/scripts/tests`.
+tension peaks and beat phase have analytic tests. Run: `python -m pytest .agents/skills/video-clone/scripts/tests`.
 
 ## Stage 2 — Motion Score IR
 

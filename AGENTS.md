@@ -22,17 +22,17 @@ Người dùng cung cấp:
 Tạo thư mục dự án: `projects/<YYYYMMDD-slug>/`
 Chạy lệnh phân tích:
 ```bash
-python .claude/skills/video-clone/scripts/analyze.py <URL hoặc path video> --out projects/<id>/analysis
+python .agents/skills/video-clone/scripts/analyze.py <URL hoặc path video> --out projects/<id>/analysis
 ```
 - Đọc kết quả từ `projects/<id>/analysis/report.json`, `fingerprint.json`, và `peaks.json`.
 - Xác định:
   - Tỉ lệ khung hình (thường là 9:16 dọc), FPS, độ dài.
   - Nhịp cắt cảnh (cuts per 10s), chuyển động camera (zoom-in, pan).
   - Điểm cao trào (Peaks: P1, P2, P3).
-  - Lựa chọn Style tương ứng trong `.claude/skills/video-clone/styles/*.md` (ví dụ: `narrated-comic-vlog`, `anime-cel`, `whiteboard-explainer`, `crayon-storybook`, `pixel-story`...).
+  - Lựa chọn Style tương ứng trong `.agents/skills/video-clone/styles/*.md` (ví dụ: `narrated-comic-vlog`, `anime-cel`, `whiteboard-explainer`, `crayon-storybook`, `pixel-story`...).
 
 ### Bước 3: Lên Kịch bản & Thảo luận với người dùng (Pre-production Plan)
-- Viết file `projects/<id>/plan.json` theo chuẩn `.claude/skills/video-clone/CONTRACT.md`.
+- Viết file `projects/<id>/plan.json` theo chuẩn `.agents/skills/video-clone/CONTRACT.md`.
 - Viết file `projects/<id>/STORYBOARD.md` chi tiết từng cảnh (Shot-by-shot).
 - **Tạo Artifact Storyboard hiển thị trực tiếp trong Chat:**
   - Trình bày tóm tắt cốt truyện, danh sách nhân vật, các cảnh quay chính.
@@ -42,7 +42,7 @@ python .claude/skills/video-clone/scripts/analyze.py <URL hoặc path video> --o
 ### Bước 4: Sản xuất & Render (Production)
 Khi người dùng duyệt:
 1. **Chuẩn bị Assets:**
-   - Tìm kiếm âm thanh, nhạc nền miễn phí: `python .claude/skills/video-clone/scripts/fetch_assets.py search|get ...`
+   - Tìm kiếm âm thanh, nhạc nền miễn phí: `python .agents/skills/video-clone/scripts/fetch_assets.py search|get ...`
    - Tạo hình nhân vật vector trong `projects/<id>/build/assets/cast/<name>.js`.
 2. **Lập trình chuyển động Animation:**
    - Viết mã HTML/SVG/JavaScript hoặc HyperFrames cho từng cảnh trong `projects/<id>/build/`.
@@ -50,13 +50,13 @@ Khi người dùng duyệt:
 3. **Render khung hình:**
    - Render snapshot/khung hình kiểm tra bằng Chrome headless hoặc script `hf_frames.py`:
      ```bash
-     python .claude/skills/video-clone/scripts/hf_frames.py projects/<id>/build --times 0.5,1.0,2.5
+     python .agents/skills/video-clone/scripts/hf_frames.py projects/<id>/build --times 0.5,1.0,2.5
      ```
 
 ### Bước 5: Chấm điểm & Ghép video (Quality Gate & Final Output)
 - Chạy đối chiếu chất lượng với video mẫu:
   ```bash
-  python .claude/skills/video-clone/scripts/compare.py projects/<id> --video projects/<id>/out/draft.mp4
+  python .agents/skills/video-clone/scripts/compare.py projects/<id> --video projects/<id>/out/draft.mp4
   ```
 - **Quy tắc nghiệm thu:** Mỗi cảnh phải đạt điểm tương đồng phong cách $\ge 4.0/5.0$. Nếu chưa đạt, sửa lại code animation của cảnh đó.
 - Ghép âm thanh, lồng tiếng và xuất video hoàn chỉnh: `projects/<id>/out/video.mp4`.
