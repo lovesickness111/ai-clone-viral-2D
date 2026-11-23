@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>reel25d</title>
+<style>
+  html, body { margin: 0; background: #000; overflow: hidden; }
+  /* stage size is set from director.size by scene.js */
+  #stage { position: relative; width: 1080px; height: 1440px; overflow: hidden; background: #000; }
+  canvas { position: absolute; left: 0; top: 0; }
+  /* the meme caption: white bold italic serif with a black outline, top of frame, 1-2 lines */
+  #caption { position: absolute; left: 5%; right: 5%; top: 6%; text-align: center; display: none;
+             font-family: Cambria, Georgia, "Times New Roman", serif; font-style: italic; font-weight: 700;
+             font-size: 64px; line-height: 1.12; color: #fff; white-space: pre-wrap;
+             -webkit-text-stroke: 3px #000; paint-order: stroke fill; text-shadow: 0 2px 8px rgba(0,0,0,.55); }
+  #watermark { position: absolute; left: 0; right: 0; bottom: 9%; text-align: center; display: none;
+               font-family: Georgia, serif; font-style: italic; font-weight: 700; font-size: 34px;
+               color: #ffd34d; -webkit-text-stroke: 1.5px #000; paint-order: stroke fill; letter-spacing: 1px; }
+  /* full-frame colour overlay (cut to black, flashes) */
+  #overlay { position: absolute; inset: 0; background: #000; opacity: 0; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="caption"></div>
+  <div id="watermark"></div>
+  <div id="overlay"></div>
+</div>
+<script src="bundle.js"></script>
+</body>
+</html>
