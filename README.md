@@ -14,6 +14,21 @@
 
 ---
 
+## 🎬 Video demo: meme bút sáp
+
+Clip 13 giây làm hoàn toàn trong chat. Video mẫu là một reel meme TikTok. Agent phân tích nhịp cắt, đo thời điểm của từng câu thoại, rồi dựng lại với nhân vật mới bằng phong cách bút sáp (`crayon-storybook`), lồng giọng tiếng Việt và SFX.
+
+<p align="center">
+  <img src="docs/assets/demos/crayon-meme.gif" width="320" alt="Demo meme bút sáp: Bự gọi phục vụ, lật kèo đuổi Tèo ra ngoài, BÙM">
+</p>
+
+<p align="center"><a href="docs/assets/demos/crayon-meme.mp4">▶ Xem bản có tiếng (MP4, 540×720)</a> · GIF ở trên không có tiếng</p>
+
+* **Quy trình:** link TikTok → `analyze.py` (nhịp, cảnh, cao trào) → nhận dạng giọng nói để lấy thời điểm từng câu → storyboard → dựng nhân vật và bối cảnh → render từng khung bằng Chrome headless → ghép giọng đọc và SFX.
+* **Nguồn:** lời thoại và nhịp phỏng theo reel của @trieu.roblox2. Nhân vật, bối cảnh và hình ảnh đều vẽ mới, không cắt hình nào từ clip gốc. Giọng đọc là gTTS tiếng Việt. SFX lấy từ Freesound, giấy phép CC0: "Pop Sound" (ConarB13), "Musket Explosion" (Willlewis), "BOOM IMPACT 2" (XHALE303).
+
+---
+
 ## 🎨 Phong cách minh họa
 
 Cùng một kịch bản meme 13 giây ("Có thằng bạn đáng đồng tiền :))": Tèo quên tiền, Bự gọi phục vụ, rồi lật kèo đuổi bạn ra ngoài), dựng bằng 5 phong cách khác nhau. Mỗi ô có 2 khung: **9,5 giây** (lật kèo) và **11,9 giây** (vụ nổ). Tất cả là khung render thật từ engine, nhân vật đều là nhân vật mới, không cắt hình nào từ clip tham khảo.
